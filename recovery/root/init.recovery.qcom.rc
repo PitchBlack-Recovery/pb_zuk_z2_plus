@@ -36,6 +36,11 @@ on boot
     # Enable sched boost
     write /proc/sys/kernel/sched_boost 1
 
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
+
 on enable-low-power
     # Disable thermal BCL hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
